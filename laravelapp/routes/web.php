@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HelloController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,42 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-$html = <<<EOF
-<html>
-<head>
-<title>Hello</title>
-<style>
-body {font-size:16pt; color:#999; }
-h1 { font-size:100pt; text-align:right; color:#eee; margin:-40px 0px -50px 0px; } 
-</style></head>
-<body>
-    <h1>Hello</h1>
-    <p>This is sample page.</p>
-    <p>これは、サンプルで作ったページです。</p>
-</body>
-</html>
-EOF;
+// Laravel8から以下の書き方に変更となった
+// Route::get('hello', 'HelloController@index');
 
-Route::get('hello', function () use ($html) {
-    return $html;
-});
-
-
-Route::get('hello/{msg?}', function ($msg='no meaage')  {
-    $html = <<<EOF
-        <html>
-        <head>
-        <title>Hello</title>
-        <style>
-        body {font-size:16pt; color:#999; }
-        h1 { font-size:100pt; text-align:right; color:#eee; margin:-40px 0px -50px 0px; } 
-        </style></head>
-        <body>
-            <h1>Hello</h1>
-            <p>{$msg}</p>
-            <p>これは、サンプルで作ったページです。</p>
-        </body>
-        </html>
-    EOF;
-    return $html;
-});
+// Route::get('hello', [HelloController::class, 'index']);
+// Route::get('hello/other', [HelloController::class, 'other']);
+Route::get('hello', [HelloController::class, '__invoke']);
