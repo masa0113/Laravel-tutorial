@@ -14,9 +14,7 @@ use App\Http\Controllers\HelloController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',  fn() => view('welcome'));
 
 // Laravel8から以下の書き方に変更となった
 // Route::get('hello', 'HelloController@index');
